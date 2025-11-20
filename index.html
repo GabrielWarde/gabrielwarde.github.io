@@ -90,12 +90,136 @@
         }
 
         nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             font-size: 1.5rem;
             font-weight: bold;
+        }
+
+        nav .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        nav .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        nav .profile-pic:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            color: var(--light);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            background: #ffffff;
+            color: #1e293b;
+        }
+
+        body.light-theme .bg-animated {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        body.light-theme .bg-animated::before {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+        }
+
+        body.light-theme .bg-animated::after {
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+        }
+
+        body.light-theme nav {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        body.light-theme nav a {
+            color: #1e293b;
+        }
+
+        body.light-theme .hero-content h1,
+        body.light-theme section h2 {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-theme .hero-content .subtitle {
+            color: var(--secondary);
+        }
+
+        body.light-theme .hero-content p,
+        body.light-theme .exp-card li,
+        body.light-theme .project-card p,
+        body.light-theme .articles-container p {
+            color: #475569;
+        }
+
+        body.light-theme .exp-card,
+        body.light-theme .skill-category,
+        body.light-theme .project-card,
+        body.light-theme .contact-card,
+        body.light-theme .articles-container {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        body.light-theme .card-face {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-theme .exp-company,
+        body.light-theme .contact-card a,
+        body.light-theme .contact-card p {
+            color: #1e293b;
+        }
+
+        body.light-theme .exp-date {
+            color: #64748b;
+        }
+
+        body.light-theme .skill-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: #1e293b;
+        }
+
+        body.light-theme footer {
+            background: rgba(255, 255, 255, 0.9);
+            color: #64748b;
+        }
+
+        body.light-theme .theme-toggle {
+            background: rgba(99, 102, 241, 0.1);
+            color: #1e293b;
         }
 
         nav ul {
