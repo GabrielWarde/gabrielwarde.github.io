@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabriel WARDE - Data Scientist Junior</title>
     <style>
+        /* Variables CSS et Styles Existants (Inclus pour contexte) */
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +26,7 @@
             background: var(--dark);
             color: var(--light);
             overflow-x: hidden;
+            transition: background 0.5s, color 0.5s; /* Ajout d'une transition pour le thème */
         }
 
         /* Animated Background */
@@ -36,6 +38,7 @@
             height: 100%;
             z-index: -1;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            transition: background 0.5s; /* Transition pour le background */
         }
 
         .bg-animated::before {
@@ -78,6 +81,7 @@
             z-index: 1000;
             padding: 1rem 0;
             border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            transition: background 0.5s, border-color 0.5s;
         }
 
         nav .container {
@@ -89,16 +93,38 @@
             align-items: center;
         }
 
+        /* MISE À JOUR : Logo et Photo de Profil */
         nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             font-size: 1.5rem;
             font-weight: bold;
+        }
+
+        nav .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        nav .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        nav .profile-pic:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+        }
+
         /* Theme Toggle */
+        /* MISE À JOUR : Ajout d'une icône pour le thème */
         .theme-toggle {
             background: rgba(99, 102, 241, 0.1);
             border: 2px solid var(--primary);
@@ -116,6 +142,17 @@
         .theme-toggle:hover {
             background: var(--primary);
             transform: translateY(-2px);
+        }
+        
+        /* NOUVEAU : Style de l'icône du thème */
+        .theme-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            transition: transform 0.3s;
+        }
+        
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(360deg);
         }
 
         /* Light Theme */
@@ -171,10 +208,12 @@
         body.light-theme .articles-container {
             background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ajout d'une ombre légère */
         }
 
         body.light-theme .card-face {
             background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
         body.light-theme .exp-company,
@@ -195,6 +234,7 @@
         body.light-theme footer {
             background: rgba(255, 255, 255, 0.9);
             color: #64748b;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         body.light-theme .theme-toggle {
@@ -214,7 +254,9 @@
             transition: all 0.3s;
             position: relative;
         }
-
+        
+        /* Reste des styles (Hero, Experience, Skills, Projects, Contact, Footer, Responsive, Animations) - NON MODIFIÉ MAJEUREMENT */
+        
         nav a::after {
             content: '';
             position: absolute;
@@ -646,6 +688,22 @@
             .card-3d {
                 height: 400px;
             }
+            
+            nav .container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+            
+            .theme-toggle {
+                order: 2;
+            }
         }
 
         /* Smooth Scroll */
@@ -672,8 +730,8 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <img src="profile-pic.png" alt="Gabriel WARDE" class="profile-pic">
-                <span class="logo-text">GW</span>
+                <img src="gabriel-profile.png" alt="Photo de profil de Gabriel WARDE" class="profile-pic">
+                <span class="logo-text">Gabriel WARDE</span>
             </div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
@@ -683,8 +741,9 @@
                 <li><a href="#articles">Articles</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
-                <span id="theme-icon">🌙</span>
+            <button class="theme-toggle">
+                <span class="theme-icon">🔆</span>
+                Thème
             </button>
         </div>
     </nav>
@@ -692,8 +751,8 @@
     <section id="accueil" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Gabriel WARDE</h1>
-                <p class="subtitle">Data Scientist Junior</p>
+                <h1>Data Scientist Junior</h1>
+                <p class="subtitle">Spécialisé en Machine Learning, Deep Learning et IA Générative.</p>
                 <p>
                     Diplômé d'un Master Data Science avec mention, je suis spécialisé en Machine Learning, Deep Learning et IA Générative. 
                     Je transforme les données complexes en solutions concrètes, fiables et exploitables, avec rigueur et curiosité.
@@ -903,34 +962,42 @@
     </footer>
 
     <script>
-        // Theme Toggle
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            
-            body.classList.toggle('light-theme');
-            
-            if (body.classList.contains('light-theme')) {
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'light');
-            } else {
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            }
+        // NOUVEAU : Fonctionnalité de basculement de thème
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // 1. Appliquer le thème sauvegardé ou par défaut (Dark)
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+            updateThemeIcon(currentTheme === 'light-theme');
+        } else {
+            // Par défaut, c'est le thème sombre (dark), l'icône doit être 🔆
+            updateThemeIcon(false);
         }
 
-        // Load saved theme
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            const themeIcon = document.getElementById('theme-icon');
-            
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
-                themeIcon.textContent = '☀️';
+        function updateThemeIcon(isLight) {
+            themeIcon.textContent = isLight ? '🌙' : '🔆';
+        }
+
+        // 2. Écouter le clic sur le bouton
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-theme')) {
+                // Passage de Clair à Sombre
+                body.classList.remove('light-theme');
+                localStorage.setItem('theme', 'dark-theme');
+                updateThemeIcon(false);
+            } else {
+                // Passage de Sombre à Clair
+                body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light-theme');
+                updateThemeIcon(true);
             }
         });
 
-        // Smooth scroll animation observer
+
+        // Smooth scroll animation observer (Code existant)
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -948,22 +1015,39 @@
             observer.observe(el);
         });
 
-        // 3D Card rotation effect
+        // 3D Card rotation effect (Code existant)
         const card3d = document.querySelector('.card-3d');
         const cardFace = document.querySelector('.card-face');
 
         document.addEventListener('mousemove', (e) => {
             if (window.innerWidth > 768) {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+                const rect = card3d.getBoundingClientRect();
                 
+                // Calculer la position relative de la souris par rapport au centre de la carte
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const sensitivity = 20; // Ajuster cette valeur pour la sensibilité
+                
+                // Inverser l'effet : plus la souris est à gauche, plus l'axe Y tourne positivement (vers la droite)
+                const xAxis = (e.clientY - centerY) / sensitivity; 
+                const yAxis = (centerX - e.clientX) / sensitivity;
+
                 if (card3d) {
-                    card3d.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                    card3d.style.transform = `rotateY(${yAxis}deg) rotateX(${xAxis}deg)`;
                 }
             }
         });
+        
+        // Remettre la carte à sa position initiale lorsque la souris quitte la zone
+        card3d.addEventListener('mouseleave', () => {
+             if (window.innerWidth > 768) {
+                 card3d.style.transform = `rotateY(0deg) rotateX(0deg)`;
+             }
+        });
 
-        // Active nav link
+
+        // Active nav link (Code existant)
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
 
