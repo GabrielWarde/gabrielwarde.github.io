@@ -90,32 +90,12 @@
         }
 
         nav .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
             font-size: 1.5rem;
             font-weight: bold;
-        }
-
-        nav .logo-text {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        nav .profile-pic {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            transition: all 0.3s;
-        }
-
-        nav .profile-pic:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
         }
 
         /* Theme Toggle */
@@ -691,7 +671,10 @@
 
     <nav>
         <div class="container">
-            <div class="logo">GdgdgW</div>
+            <div class="logo">
+                <img src="profile-pic.png" alt="Gabriel WARDE" class="profile-pic">
+                <span class="logo-text">GW</span>
+            </div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#experience">Expérience</a></li>
@@ -700,13 +683,16 @@
                 <li><a href="#articles">Articles</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+                <span id="theme-icon">🌙</span>
+            </button>
         </div>
     </nav>
 
     <section id="accueil" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Gabrfdfdiel WARDE</h1>
+                <h1>Gabriel WARDE</h1>
                 <p class="subtitle">Data Scientist Junior</p>
                 <p>
                     Diplômé d'un Master Data Science avec mention, je suis spécialisé en Machine Learning, Deep Learning et IA Générative. 
@@ -917,6 +903,33 @@
     </footer>
 
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('light-theme');
+            
+            if (body.classList.contains('light-theme')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                themeIcon.textContent = '☀️';
+            }
+        });
+
         // Smooth scroll animation observer
         const observerOptions = {
             threshold: 0.1,
