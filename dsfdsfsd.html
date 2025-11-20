@@ -26,7 +26,7 @@
             background: var(--dark);
             color: var(--light);
             overflow-x: hidden;
-            transition: background 0.5s, color 0.5s;
+            transition: background 0.5s, color 0.5s; /* Ajout d'une transition pour le thème */
         }
 
         /* Animated Background */
@@ -38,7 +38,7 @@
             height: 100%;
             z-index: -1;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            transition: background 0.5s;
+            transition: background 0.5s; /* Transition pour le background */
         }
 
         .bg-animated::before {
@@ -93,12 +93,12 @@
             align-items: center;
         }
 
-        /* MISE À JOUR : Logo pour initiales */
+        /* MISE À JOUR : Logo et Photo de Profil */
         nav .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem; /* Réduit l'espace */
-            font-size: 1.8rem; /* Agrandit les initiales */
+            gap: 1rem;
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
@@ -109,36 +109,34 @@
             background-clip: text;
         }
 
-        /* Photo dans le Ruban */
-        nav .profile-pic-ribbon { /* NOUVEAU CLASSE pour la photo dans le ruban */
-            width: 35px;
-            height: 35px;
+        nav .profile-pic {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary);
+            border: 3px solid var(--primary);
             transition: all 0.3s;
         }
 
-        nav .profile-pic-ribbon:hover {
+        nav .profile-pic:hover {
             transform: scale(1.1);
-            box-shadow: 0 3px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* MISE À JOUR : Theme Toggle (retrait du texte 'Thème') */
+        /* Theme Toggle */
+        /* MISE À JOUR : Ajout d'une icône pour le thème */
         .theme-toggle {
             background: rgba(99, 102, 241, 0.1);
             border: 2px solid var(--primary);
             border-radius: 30px;
-            padding: 0.5rem; /* Ajusté pour ne laisser que l'icône */
+            padding: 0.5rem 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
             transition: all 0.3s;
             color: var(--light);
             font-size: 1.2rem;
-            width: 50px; /* Taille fixe pour le bouton rond */
-            height: 50px;
         }
 
         .theme-toggle:hover {
@@ -146,7 +144,7 @@
             transform: translateY(-2px);
         }
         
-        /* Style de l'icône du thème */
+        /* NOUVEAU : Style de l'icône du thème */
         .theme-icon {
             font-size: 1.4rem;
             line-height: 1;
@@ -184,7 +182,6 @@
             color: #1e293b;
         }
 
-        body.light-theme .hero-content .name-big, /* MISE À JOUR */
         body.light-theme .hero-content h1,
         body.light-theme section h2 {
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -211,7 +208,7 @@
         body.light-theme .articles-container {
             background: rgba(255, 255, 255, 0.8);
             border: 1px solid rgba(99, 102, 241, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Ajout d'une ombre légère */
         }
 
         body.light-theme .card-face {
@@ -245,9 +242,6 @@
             color: #1e293b;
         }
 
-        body.light-theme .card-face h3 {
-            color: #1e293b; /* Force the text to black/dark in the light theme */
-        }
         nav ul {
             display: flex;
             gap: 2rem;
@@ -260,6 +254,8 @@
             transition: all 0.3s;
             position: relative;
         }
+        
+        /* Reste des styles (Hero, Experience, Skills, Projects, Contact, Footer, Responsive, Animations) - NON MODIFIÉ MAJEUREMENT */
         
         nav a::after {
             content: '';
@@ -285,39 +281,12 @@
         }
 
         .hero .container {
-            max-width: 1600px; /* Increased from 1400px */
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 180px minmax(600px, 1fr) 280px; /* Photo fixed | Text min 600px flexible | 3D card smaller */
-            gap: 2rem 4rem; /* Horizontal gap 4rem */
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            padding: 0 3rem; /* Add padding to container */
-        }
-
-
-        
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-photo {
-            width: 220px; /* Increased from 180px */
-            height: 220px; /* Increased from 180px */
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--primary);
-            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.5);
-            transition: all 0.5s;
-            animation: slideInLeft 0.6s ease-out;
-            justify-self: start;
-            margin-left: -110px; /* Push further left */
-        }
-
-        .hero-photo:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.7);
         }
 
         .hero-content h1 {
@@ -342,13 +311,6 @@
             line-height: 1.8;
             margin-bottom: 2rem;
             animation: slideInLeft 1.2s ease-out;
-        }
-
-        .hero-visual {
-            perspective: 1000px;
-            animation: slideInRight 1s ease-out;
-            width: 280px; /* Reduced from 320px */
-            justify-self: end; /* Push to the right edge */
         }
 
         .cta-buttons {
@@ -388,10 +350,16 @@
             color: white;
         }
 
+        /* 3D Card */
+        .hero-visual {
+            perspective: 1000px;
+            animation: slideInRight 1s ease-out;
+        }
+
         .card-3d {
             position: relative;
             width: 100%;
-            height: 380px; /* Slightly reduced */
+            height: 500px;
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
@@ -408,29 +376,23 @@
             border-radius: 20px;
             border: 1px solid rgba(99, 102, 241, 0.3);
             backdrop-filter: blur(10px);
-            padding: 2rem; /* Reduced from 3rem */
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 0.8rem; /* Reduced from 1rem */
-        }
-
-        .card-face h3 {
-            color: var(--light);
-            font-size: 1rem;
-            margin: 0;
+            gap: 1rem;
         }
 
         .tech-icon {
-            width: 50px; /* Reduced from 60px */
-            height: 50px; /* Reduced from 60px */
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem; /* Reduced from 1.5rem */
+            font-size: 1.5rem;
             animation: pulse 2s infinite;
         }
 
@@ -439,7 +401,6 @@
             50% { transform: scale(1.05); }
         }
 
-        /* Animations existantes conservées */
         @keyframes slideInLeft {
             from {
                 opacity: 0;
@@ -462,8 +423,7 @@
             }
         }
 
-        /* Reste des styles (Experience, Skills, Projects, Contact, Footer, Responsive, Animations) */
-
+        /* Section Styles */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -712,40 +672,23 @@
         }
 
         /* Responsive */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .hero .container {
                 grid-template-columns: 1fr;
-                gap: 2rem;
             }
-            
-            .hero-photo {
-                margin: 0 auto;
-                order: 1;
-            }
-            
-            .hero-content {
-                order: 2;
-                text-align: center;
-            }
-            
-            .hero-visual {
-                order: 3;
-                margin: 0 auto;
-                width: 100%;
-                max-width: 350px;
-            }
-            
-            .cta-buttons {
-                justify-content: center;
-            }
-        }
 
-        @media (max-width: 768px) {
-            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
             nav ul {
                 gap: 1rem;
             }
 
+            .card-3d {
+                height: 400px;
+            }
+            
             nav .container {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -760,7 +703,6 @@
             
             .theme-toggle {
                 order: 2;
-                margin-left: 1rem;
             }
         }
 
@@ -788,8 +730,8 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <img src="gabriel-profile.png" alt="Photo de profil de Gabriel WARDE" class="profile-pic-ribbon">
-                <span class="logo-text">GW</span>
+                <img src="gabriel-profile.png" alt="Photo de profil de Gabriel WARDE" class="profile-pic">
+                <span class="logo-text">Gabriel WARDE</span>
             </div>
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
@@ -801,17 +743,15 @@
             </ul>
             <button class="theme-toggle">
                 <span class="theme-icon">🔆</span>
+                Thème
             </button>
         </div>
     </nav>
 
     <section id="accueil" class="hero">
         <div class="container">
-            <img src="gabriel-profile.png" alt="Photo de profil de Gabriel WARDE" class="hero-photo">
-            
             <div class="hero-content">
-                <h1>Gabriel WARDE</h1>
-                <p class="subtitle">Data Scientist Junior</p>
+                <h1>Data Scientist Junior</h1>
                 <p class="subtitle">Spécialisé en Machine Learning, Deep Learning et IA Générative.</p>
                 <p>
                     Diplômé d'un Master Data Science avec mention, je suis spécialisé en Machine Learning, Deep Learning et IA Générative. 
@@ -822,7 +762,6 @@
                     <a href="#projets" class="btn btn-secondary">Voir Mes Projets</a>
                 </div>
             </div>
-            
             <div class="hero-visual">
                 <div class="card-3d">
                     <div class="card-face">
@@ -1076,14 +1015,11 @@
             observer.observe(el);
         });
 
-        // 3D Card rotation effect (Code existant - MODIFIED)
+        // 3D Card rotation effect (Code existant)
         const card3d = document.querySelector('.card-3d');
         const cardFace = document.querySelector('.card-face');
 
-        // ATTENTION : L'écouteur 'mousemove' est maintenant attaché 
-        // directement au SÉLECTEUR de la carte pour ne s'activer qu'au survol.
-        card3d.addEventListener('mousemove', (e) => {
-            // We only want the effect on desktop screens
+        document.addEventListener('mousemove', (e) => {
             if (window.innerWidth > 768) {
                 const rect = card3d.getBoundingClientRect();
                 
@@ -1091,24 +1027,23 @@
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
                 
-                const sensitivity = 5; // Ajuster cette valeur pour la sensibilité
+                const sensitivity = 20; // Ajuster cette valeur pour la sensibilité
                 
                 // Inverser l'effet : plus la souris est à gauche, plus l'axe Y tourne positivement (vers la droite)
                 const xAxis = (e.clientY - centerY) / sensitivity; 
                 const yAxis = (centerX - e.clientX) / sensitivity;
 
                 if (card3d) {
-                    // Appliquer la transformation en fonction de la position de la souris
                     card3d.style.transform = `rotateY(${yAxis}deg) rotateX(${xAxis}deg)`;
                 }
             }
         });
-
+        
         // Remettre la carte à sa position initiale lorsque la souris quitte la zone
         card3d.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 768) {
-                card3d.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            }
+             if (window.innerWidth > 768) {
+                 card3d.style.transform = `rotateY(0deg) rotateX(0deg)`;
+             }
         });
 
 
