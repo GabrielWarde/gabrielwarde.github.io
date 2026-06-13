@@ -1000,6 +1000,8 @@ const idleMessages=[
     "404: Idle thought not found. Ask me something! 🤔",
     "Did you know Gabriel speaks Arabic natively? كيفك! 🇱🇧",
     "My processing speed: fast. My dance speed: faster. 🕺",
+    "Psst — have you tried clicking on Gabriel's photo? 📸✨",
+    "Click Gabriel's photo up top… trust me, it's worth it 😏🎆",
 ];
 let idleIdx = 0; // shuffled below
 // Shuffle idle messages for variety
@@ -1912,10 +1914,17 @@ function gabotJoke(){
 
     /* ---- hover 3D tilt ---- */
     let tx=0,ty=0,cx=0,cy=0,raf=null,active=false,ot=0;
+    // extra targets: lean rotation, translate toward cursor, zoom
+    let trz=0,crz=0, tpx=0,cpx2=0, tpy=0,cpy2=0, tsc=1,csc=1;
     function animate(){
         raf=requestAnimationFrame(animate);
         cx+=(tx-cx)*.12; cy+=(ty-cy)*.12;
-        card.style.transform='rotateX('+cy+'deg) rotateY('+cx+'deg)';
+        crz+=(trz-crz)*.12; cpx2+=(tpx-cpx2)*.12; cpy2+=(tpy-cpy2)*.12;
+        csc+=(tsc-csc)*.12;
+        card.style.transform=
+            'translate('+cpx2.toFixed(2)+'px,'+cpy2.toFixed(2)+'px) '+
+            'rotateX('+cy.toFixed(2)+'deg) rotateY('+cx.toFixed(2)+'deg) '+
+            'rotateZ('+crz.toFixed(2)+'deg) scale('+csc.toFixed(3)+')';
         if(active && dots.length){
             ot+=.03; const Rr=128;
             dots.forEach((d,i)=>{
@@ -1926,8 +1935,10 @@ function gabotJoke(){
                 d.style.opacity=(.3+depth*.7).toFixed(2);
             });
         }
-        if(!active && Math.abs(cx)<.05 && Math.abs(cy)<.05){
-            card.style.transform='rotateX(0deg) rotateY(0deg)';
+        if(!active && Math.abs(cx)<.05 && Math.abs(cy)<.05 &&
+           Math.abs(crz)<.05 && Math.abs(csc-1)<.002 &&
+           Math.abs(cpx2)<.1 && Math.abs(cpy2)<.1){
+            card.style.transform='translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)';
             cancelAnimationFrame(raf); raf=null;
         }
     }
@@ -1936,14 +1947,16 @@ function gabotJoke(){
     if(finePointer && !reduced){
         stage.addEventListener('pointerenter',()=>{
             if(document.body.classList.contains('photo-bouncing')) return;
-            active=true; stage.classList.add('active'); ensure();
+            active=true; stage.classList.add('active');
+            ensure();
         });
         stage.addEventListener('pointermove',e=>{
             if(document.body.classList.contains('photo-bouncing')) return;
             const r=stage.getBoundingClientRect();
             const px=(e.clientX-r.left)/r.width-.5;
             const py=(e.clientY-r.top)/r.height-.5;
-            tx=px*26; ty=-py*26;
+            tx=px*26; ty=-py*26;            // parallax tilt
+            trz=px*6;                        // lean a few degrees toward cursor side
             if(shine){
                 shine.style.setProperty('--gx',(px*60+50)+'%');
                 shine.style.setProperty('--gy',(py*60+50)+'%');
@@ -1951,7 +1964,8 @@ function gabotJoke(){
             ensure();
         });
         stage.addEventListener('pointerleave',()=>{
-            active=false; stage.classList.remove('active'); tx=0; ty=0; ensure();
+            active=false; stage.classList.remove('active');
+            tx=0; ty=0; trz=0; tpx=0; tpy=0; ensure();
         });
     }
 
@@ -1960,7 +1974,11 @@ function gabotJoke(){
     function launchBounce(clientX,clientY){
         if(bouncing||!img) return;
         bouncing=true;
-        active=false; stage.classList.remove('active'); tx=0; ty=0;
+        active=false; stage.classList.remove('active');
+        // snap hover transform back to neutral so the photo bounces at normal size
+        tx=ty=trz=tpx=tpy=0; tsc=1;
+        cx=cy=crz=cpx2=cpy2=0; csc=1;
+        card.style.transform='translate(0px,0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)';
 
         const r=img.getBoundingClientRect();
         fxBurst(r.left+r.width/2, r.top+r.height/2, 90, 1.25);
